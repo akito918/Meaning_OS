@@ -1,0 +1,15 @@
+﻿core_id,can_be_relation,status_view,core_conditions_json,note
+core:knife.kitchen-001,0,active,{},
+core:knife.generic-001,0,active,{},
+core:houcho-0001,0,active,"{""domain"": [""cooking""], ""region"": [""JP""], ""era"": [""Showa"", ""Heisei"", ""Reiwa""], ""concept_strength"": 0.95}",日本では強い単一概念として成立する包丁
+core:kitchen-knife-0001,0,active,"{""domain"": [""cooking""], ""region"": [""US"", ""UK""], ""era"": [""Modern""], ""concept_strength"": 0.4}",英語圏では属性組み合わせ寄りの概念
+core:blade-tool-001,0,active,{},
+core:steel-001,0,active,{},
+core:ceramic-001,0,active,{},
+core:cut.with_blade-001,0,active,{},
+core:use-purpose-001,1,active,{},関係ノード（用途）
+core:use-purpose-for-001,1,active,{},関係ノード（用途←）
+core:material-001,1,active,{},関係ノード（素材）
+core:material-for-001,1,active,{},関係ノード（素材←）
+core:category-001,1,active,{},関係ノード（分類）
+core:category-of-001,1,active,{},関係ノード（分類←）
