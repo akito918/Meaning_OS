@@ -1,4 +1,4 @@
-# app.py -- HuggingFace Spaces 用 Gradio UI（日本語/英語対応）
+# app.py - HuggingFace Spaces 用 Gradio UI（日本語/英語対応）
 
 import json
 from pathlib import Path
