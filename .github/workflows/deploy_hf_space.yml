@@ -1,0 +1,39 @@
+name: Deploy impl_space to Hugging Face Space
+
+on:
+  push:
+    branches:
+      - main                 # ← メインブランチ名に合わせて。別なら変更してOK
+    paths:
+      - "impl_space/**"      # ← 実装フォルダ名に合わせる
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy impl_space to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_USERNAME: ${{ secrets.HF_USERNAME }}
+          HF_SPACE: ${{ secrets.HF_SPACE }}
+        run: |
+          cd impl_space
+
+          # 一時的な Git リポジトリをここに作る
+          git init
+          git config user.email "ci@example.com"
+          git config user.name "github-actions[bot]"
+
+          git add .
+          git commit -m "Deploy from GitHub Actions ${GITHUB_SHA}"
+          git branch -M main
+
+          # Hugging Face Space を origin として登録
+          git remote add origin https://$HF_USERNAME:$HF_TOKEN@huggingface.co/spaces/$HF_USERNAME/$HF_SPACE
+
+          # Space 側の main ブランチを上書き
+          git push --force origin main
