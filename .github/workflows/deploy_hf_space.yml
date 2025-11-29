@@ -1,21 +1,36 @@
-- name: Deploy impl_space to Hugging Face Space
-  env:
-    HF_TOKEN: ${{ secrets.HF_TOKEN }}
-    HF_USERNAME: ${{ secrets.HF_USERNAME }}
-    HF_SPACE: ${{ secrets.HF_SPACE }}
-  run: |
-    cd impl_space
+name: Deploy impl_space to Hugging Face Space
 
-    git init
-    git config user.email "ci@example.com"
-    git config user.name "github-actions[bot]"
+on:
+  push:
+    branches:
+      - main              # ← デフォルトブランチが main の場合
+    paths:
+      - "impl_space/**"   # ← HF に同期したいフォルダ名
 
-    git add .
-    git commit -m "Deploy from GitHub Actions ${GITHUB_SHA}"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-    # ここが問題になってるので厳しめに 1 行で・ダブルクォートで囲む
-    git remote add origin "https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # master → main に揃えて push（HF 側が main 前提なことが多い）
-    git branch -M main
-    git push --force origin main
+      - name: Deploy impl_space to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_USERNAME: ${{ secrets.HF_USERNAME }}
+          HF_SPACE: ${{ secrets.HF_SPACE }}
+        run: |
+          cd impl_space
+
+          git init
+          git config user.email "ci@example.com"
+          git config user.name "github-actions[bot]"
+
+          git add .
+          git commit -m "Deploy from GitHub Actions ${GITHUB_SHA}"
+
+          git remote add origin "https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}"
+
+          git branch -M main
+          git push --force origin main
