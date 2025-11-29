@@ -72,18 +72,44 @@ class TripleEvidence:
 
 # ========== ロード関数 ==========
 
-def load_core_concepts(path: Path) -> Dict[str, CoreConcept]:
-    cores: Dict[str, CoreConcept] = {}
-    with path.open("r", encoding="utf-8", newline="") as f:
+def load_core_concepts(path: Path):
+    """
+    core_concepts.csv を読み込む。
+    BOM（\ufeff）付きヘッダにも対応。
+    """
+    cores = {}
+
+    # utf-8-sig で開いて BOM を吸収
+    with path.open("r", encoding="utf-8-sig", newline="") as f:
         reader = csv.DictReader(f)
+
+        # 念のため、ヘッダ名をすべて正規化
+        if reader.fieldnames:
+            reader.fieldnames = [
+                name.lstrip("\ufeff").strip()
+                for name in reader.fieldnames
+            ]
+
         for row in reader:
-            cores[row["core_id"]] = CoreConcept(
-                core_id=row["core_id"],
-                can_be_relation=row.get("can_be_relation", "0") in ("1", "true", "True"),
-                status=row.get("status", "active"),
-                created_at=row.get("created_at", ""),
-            )
+            core_id = (row.get("core_id") or "").strip()
+            if not core_id:
+                continue
+
+            can_be_relation = (row.get("can_be_relation") or "").strip() in ("1", "true", "True")
+            status_view = (row.get("status_view") or "").strip()
+            core_conditions_json = row.get("core_conditions_json") or "{}"
+            note = row.get("note") or ""
+
+            cores[core_id] = {
+                "core_id": core_id,
+                "can_be_relation": can_be_relation,
+                "status_view": status_view,
+                "core_conditions_json": core_conditions_json,
+                "note": note,
+            }
+
     return cores
+
 
 
 def _fix_raw_json(cond_raw: str, where: str) -> dict:
