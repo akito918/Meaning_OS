@@ -5,7 +5,8 @@ from pathlib import Path
 
 import gradio as gr
 
-from mini_os_demo import MiniMeaningOS, answer_ja_question, answer_en_question
+from py.mini_os_demo import MiniMeaningOS, answer_ja_question, answer_en_question
+
 
 BASE_DIR = Path(__file__).parent
 
