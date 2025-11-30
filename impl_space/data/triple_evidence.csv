@@ -1,3 +1,0 @@
-evidence_id,triple_id,evidence_type,source_kind,stance,weight,source_detail,note,created_at
-ev0001,t0002,dictionary,reference,positive,0.9,料理辞典『○○』,包丁の素材=鋼,2025-11-26 0:00:00
-ev0002,t0003,corpus,corpus,positive,0.6,Web記事の用例,包丁の素材=セラミック,2025-11-26 0:00:00
