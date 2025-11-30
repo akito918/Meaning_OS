@@ -1,0 +1,172 @@
+Demonstration – Folder Overview
+
+This directory contains the demonstration setup for the Mini Meaning OS (Language OS Prototype).
+The project uses a split architecture to safely publish a public demo while keeping the internal logic, datasets, and reasoning engine private.
+
+The goal is to transparently demonstrate the concept and behavior of the Language OS without exposing sensitive internal files or future expansion logic.
+
+## 1. Hugging-Face-Spaces/
+
+This folder contains all files related to the deployment on Hugging Face Spaces.
+
+The project uses the recommended two-space structure:
+
+### ① Public UI Space
+
+This is the only part visible to the public.
+
+Provides a simple Gradio-based demo interface.
+
+Contains no internal logic or datasets.
+
+Calls the Private Backend Space through gradio_client using a secure token.
+
+HF_TOKEN authentication is handled through Hugging Face “Secrets” and is never included in the code.
+
+The public sees only:
+
+The interface
+
+The question → answer demo
+
+High-level behavior of the meaning system
+
+Nothing else.
+
+### ② Private Backend Space
+
+Contains the entire Mini Meaning OS implementation
+
+Meaning triples
+
+Core concepts
+
+Evidence tables
+
+Question parsers
+
+All reasoning and interpretation logic
+
+And all internal CSV files / model structures
+
+This Space is private and accessible only through an API call.
+
+Why?
+
+Because the internal meaning network is still under development and may contain:
+
+Non-final structure
+
+Experimental relations
+
+Internal notes
+
+Domain-specific placeholders
+
+Evidence sources that should not yet be published
+
+Future extensions that must be reviewed before release
+
+By keeping the backend private, the project maintains:
+
+Safety
+
+Intellectual property protection
+
+Reproducibility
+
+Flexible future publishing strategies
+
+## 2. Public-UI-Space/
+
+A local mirror of the Hugging Face public UI source code.
+
+This folder exists to:
+
+Edit UI layout safely
+
+Update descriptions or examples
+
+Separate UI logic from the internal OS logic
+
+Provide a clear boundary between “visible” and “hidden” parts of the project
+
+This separation prevents accidental exposure of internal files.
+
+## Why Split the Architecture?
+✔ Full transparency for the concept
+
+The conceptual design of the Language OS is meant to be open.
+
+✔ Full protection for the data & logic
+
+Meaning triples, domain structures, and semantic rules will grow in complexity and must be carefully reviewed before publication.
+
+✔ Prevent accidental leakage
+
+By physically separating UI and backend, nothing in the internal logic can leak through the demo.
+
+✔ Flexible future governance
+
+This architecture supports future models like:
+
+Open-core
+
+Partially public knowledge
+
+Expert-reviewed contributions
+
+Versioned releases of reasoning rules
+
+Selective exposure per domain or per concept
+
+✔ Higging Face Official Best Practice
+
+Hugging Face recommends this structure for:
+
+LLM inference servers
+
+Proprietary models
+
+API-gated demos
+
+Research-proof systems
+
+## Security Note: About HF_TOKEN
+
+The only secret in this entire project is the HF_TOKEN used to authenticate the public UI when calling the private backend.
+
+This token is stored securely in Hugging Face “Secrets”.
+
+It does not appear anywhere in the code.
+
+It cannot be viewed once entered.
+
+This ensures that the entire rest of the project can remain fully public without risk.
+
+## Summary
+
+This structure ensures:
+
+Component	Public?	Purpose
+Public UI Space	✔ Yes	Demo interface only
+Private Backend Space	✖ No	Meaning OS internal logic
+HF_TOKEN	✖ No	Authentication credential
+All other folders/files	✔ Yes	Safe to publish
+## Purpose of this README
+
+This document explains:
+
+Why the folders are separated
+
+Why the backend must remain private
+
+What the public can access
+
+What the internal OS contains
+
+How the Hugging Face Spaces architecture works
+
+Why this design is future-proof and safe
+
+Anyone reviewing this repository can understand what is published and why, without exposing any sensitive logic.
