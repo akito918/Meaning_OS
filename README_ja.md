@@ -81,6 +81,7 @@ WHO / WHAT / WHY / HOW / STATE …
 
 # 📦 リポジトリ構成
 
+```
 /
 ├─ README_en.md                     # 英語トップ README
 ├─ README_ja.md                     # 日本語トップ README
@@ -114,7 +115,7 @@ WHO / WHAT / WHY / HOW / STATE …
 │       ├─ roadmap.md
 │       ├─ semantic-graph-spec-v1.md
 │       └─ tooling-overview.md
-
+```
 
 
 ---
