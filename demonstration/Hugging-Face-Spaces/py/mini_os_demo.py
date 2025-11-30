@@ -1,4 +1,4 @@
-
+import csv
 import json
 import re
 from pathlib import Path
@@ -14,7 +14,6 @@ EXPR_CSV = DATA_DIR / "expr_links.csv"
 TRIPLES_CSV = DATA_DIR / "meaning_triples.csv"
 TRIPLES_WITH_REV = DATA_DIR / "meaning_triples_with_reverse.csv"
 TRIPLE_EVIDENCE_CSV = DATA_DIR / "triple_evidence.csv"
-
 
 
 # ========== データ構造 ==========
@@ -111,7 +110,6 @@ def load_core_concepts(path: Path):
     return cores
 
 
-
 def _fix_raw_json(cond_raw: str, where: str) -> dict:
     """
     CSV 内のゆるい JSON をそれっぽく補正してから parse する。
@@ -122,7 +120,6 @@ def _fix_raw_json(cond_raw: str, where: str) -> dict:
         return {}
 
     cond_raw = cond_raw.split("←")[0].strip()
-
     cond_raw = cond_raw.strip()
 
     if '""' in cond_raw and '"' in cond_raw:
@@ -718,11 +715,32 @@ def normalize_en_subject(subj: str) -> str:
 
 
 def parse_en_question(text: str) -> dict:
+    """
+    英語質問パーサ（用途 / 素材 / 分類 / プロフィール）。
+    "What is a knife used for?" を含むいくつかのパターンに対応。
+    """
     t = text.lower().strip()
 
-    # use / purpose
+    # --- ① 用途: "what is X used for?" パターン ---
+    # 例: "What is a knife used for?"
+    m_used = re.search(r"what is (.+?) used for", t)
+    if m_used:
+        subj_raw = m_used.group(1)            # "a knife" 部分
+        subj = normalize_en_subject(subj_raw) # → "knife"
+        return {
+            "query": text,
+            "type": "slot_query",
+            "pattern_id": "USE_EN_1",
+            "subject": subj,
+            "slot": "OUTCOME",
+            "via_lemma": "purpose",
+            "lang": "en",
+        }
+
+    # --- ① 用途: "what is the use of X" / "what is the purpose of X" ---
     if "use" in t or "purpose" in t:
         raw = t.replace("what is the use of", "").replace("what is the purpose of", "")
+        raw = raw.replace("?", "")
         subj = normalize_en_subject(raw)
         return {
             "query": text,
@@ -734,10 +752,15 @@ def parse_en_question(text: str) -> dict:
             "lang": "en",
         }
 
-    # material
+    # --- ② 素材: "what is X made of?" / "what material is X?" ---
     if "made of" in t or "material" in t:
         # 例: "what is a kitchen knife made of?"
-        raw = t.split("made of")[0].replace("what is", "")
+        if "made of" in t:
+            raw = t.split("made of")[0].replace("what is", "")
+        else:
+            # 例: "what material is a kitchen knife?"
+            raw = t.replace("what material is", "")
+        raw = raw.replace("?", "")
         subj = normalize_en_subject(raw)
         return {
             "query": text,
@@ -749,9 +772,10 @@ def parse_en_question(text: str) -> dict:
             "lang": "en",
         }
 
-    # category
+    # --- ③ 分類: "what category is X?" / "what kind of X is it?" ---
     if "category" in t or "kind of" in t:
         raw = t.replace("what category is", "").replace("what kind of", "")
+        raw = raw.replace("?", "")
         subj = normalize_en_subject(raw)
         return {
             "query": text,
@@ -763,9 +787,10 @@ def parse_en_question(text: str) -> dict:
             "lang": "en",
         }
 
-    # profile
+    # --- ④ プロフィール: "tell me about X." ---
     if "tell me about" in t:
         raw = t.replace("tell me about", "")
+        raw = raw.replace(".", "").replace("?", "")
         subj = normalize_en_subject(raw)
         return {
             "query": text,
@@ -775,46 +800,13 @@ def parse_en_question(text: str) -> dict:
             "lang": "en",
         }
 
+    # 未対応パターン
     return {
         "query": text,
         "type": "unknown_en",
         "subject": text,
         "lang": "en",
     }
-
-
-    # category
-    if "category" in t or "kind of" in t:
-        subj = t.replace("what category is", "").replace("what kind of", "")
-        subj = subj.replace("?", "").strip()
-        return {
-            "query": text,
-            "type": "slot_query",
-            "pattern_id": "CAT_EN_1",
-            "subject": subj,
-            "slot": "WHAT",
-            "via_lemma": "category",
-            "lang": "en",
-        }
-
-    # profile
-    if "tell me about" in t:
-        subj = t.replace("tell me about", "").replace(".", "").strip()
-        return {
-            "query": text,
-            "type": "profile_query",
-            "pattern_id": "PROFILE_EN_1",
-            "subject": subj,
-            "lang": "en",
-        }
-
-    return {
-        "query": text,
-        "type": "unknown_en",
-        "subject": text,
-        "lang": "en",
-    }
-
 
 
 # ========== 質問 → OS クエリ → JSON応答 ==========
@@ -938,6 +930,7 @@ def answer_ja_question(os: MiniMeaningOS, text: str) -> dict:
         "note": "このパターンの質問はまだ未対応です。",
     }
 
+
 def answer_en_question(os: MiniMeaningOS, text: str) -> dict:
     q = parse_en_question(text)
     subj = q.get("subject", "")
@@ -1017,7 +1010,6 @@ def answer_en_question(os: MiniMeaningOS, text: str) -> dict:
         "results": [],
         "note": "This English question pattern is not supported yet.",
     }
-
 
 
 # ========== スクリプトとしての実行部（対話モード） ==========
