@@ -1,7 +1,5 @@
 # 🕊️ **Language OS – Philosophy & Vision（理念・目的）**
 
-`docs/philosophy-and-vision.md`
-
 ---
 
 # 🌐 1. はじめに — なぜ「意味OS」を作るのか
@@ -178,10 +176,4 @@ Language OS は、
 
 > **Language OS は、
 > 人とAIが共有する「意味そのものの土台」になる。**
-
-* 短い 1ページ版（README へ載せる用）
-* 論文風の哲学セクション
-* 英語版（国際公開向け）
-
-もすぐ作る。
 
