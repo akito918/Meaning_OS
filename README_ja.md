@@ -81,23 +81,41 @@ WHO / WHAT / WHY / HOW / STATE …
 
 # 📦 リポジトリ構成
 
-```
 /
-├─ semantic-graph-spec-v1.md      # コア仕様書
-├─ philosophy-vision.md           # 理念・目的
-├─ tooling-overview.md            # ツール構成と応用領域
-├─ roadmap.md                     # 6ヶ月計画 & 長期ロードマップ
-├─ data/
-│   ├─ core_concepts.csv
-│   ├─ meaning_triples.csv
-│   ├─ expr_links.csv
-│   └─ rel_concepts.csv
-├─ spaces/
-│   ├─ Public-UI-Space/           # HuggingFace 公開UI
-│   └─ Private-Backend-Space/     # HuggingFace バックエンドAPI
-└─ examples/
-    └─ sample_queries.md
-```
+├─ README_en.md                     # 英語トップ README
+├─ README_ja.md                     # 日本語トップ README
+
+├─ demonstration/                   # デモ環境（HF 実装セット）
+│   ├─ Hugging-Face-Spaces/
+│   │   ├─ app.py
+│   │   ├─ requirements.txt
+│   │   ├─ deta/
+│   │   │   ├─ core_concepts.csv
+│   │   │   ├─ expr_links.csv
+│   │   │   ├─ meaning_triples.csv
+│   │   │   ├─ meaning_triples_with_reverse.csv
+│   │   │   ├─ triple_evidence.csv
+│   │   └─ py/
+│   │       └─ mini_os_demo.py
+│   └─ Public-UI-Space/
+│       └─ app.py
+
+├─ README_en.ed                     # 英語版編集用（Your work-in-progress）
+├─ README_ja.md                     # 日本語版編集用
+
+├─ docs/                            # 仕様書・哲学・ロードマップ
+│   ├─ en/
+│   │   ├─ philosophy-and-vision.md
+│   │   ├─ roadmap.md
+│   │   ├─ semantic-graph-spec-v1.md
+│   │   ├─ tooling-overview.md
+│   └─ ja/
+│       ├─ philosophy-and-vision.md
+│       ├─ roadmap.md
+│       ├─ semantic-graph-spec-v1.md
+│       └─ tooling-overview.md
+
+
 
 ---
 
