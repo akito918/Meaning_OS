@@ -8,13 +8,15 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).parent.parent  # /app/
+DATA_DIR = BASE_DIR / "data"
 
-CORE_CSV = BASE_DIR / "core_concepts.csv"
-TRIPLES_WITH_REV = BASE_DIR / "meaning_triples_with_reverse.csv"
-TRIPLES_CSV = BASE_DIR / "meaning_triples.csv"
-EXPR_CSV = BASE_DIR / "expr_links.csv"
-TRIPLE_EVIDENCE_CSV = BASE_DIR / "triple_evidence.csv"  # ★追加
+CORE_CSV = DATA_DIR / "core_concepts.csv"
+EXPR_CSV = DATA_DIR / "expr_links.csv"
+TRIPLES_CSV = DATA_DIR / "meaning_triples.csv"
+TRIPLES_WITH_REV = DATA_DIR / "meaning_triples_with_reverse.csv"
+TRIPLE_EVIDENCE_CSV = DATA_DIR / "triple_evidence.csv"
+
 
 
 # ========== データ構造 ==========
