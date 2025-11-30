@@ -1,7 +1,5 @@
 # 🗺️ **Language OS – Roadmap（6ヶ月計画 + Stretch Goals）**
 
-`docs/roadmap.md`
-
 ---
 
 # 🧭 目的
