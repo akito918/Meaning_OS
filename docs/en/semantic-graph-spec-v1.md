@@ -1,5 +1,3 @@
----
-
 ## Chapter 1. Design Philosophy
 
 ### 1.1 Purpose
