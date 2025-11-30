@@ -1,0 +1,8 @@
+triple_id,src_core_id,rel_core_id,dst_core_id,conditions_json,polarity,status,is_reverse,reverse_of,created_at,note
+t0001,core:knife.kitchen-001,core:use-purpose-001,core:cut.with_blade-001,"{""domain"": [""cooking""], ""region"": [""JP""], ""freq"": 1.0}",positive,active,0,,,包丁の用途=切る
+t0002,core:knife.kitchen-001,core:material-001,core:steel-001,"{""domain"": [""cooking""], ""region"": [""JP""], ""era"": [""Showa"", ""Heisei""], ""freq"": 0.8}",positive,active,0,,,包丁の素材=鋼
+t0003,core:knife.kitchen-001,core:material-001,core:ceramic-001,"{""domain"": [""cooking""], ""region"": [""JP""], ""era"": [""Heisei"", ""Reiwa""], ""freq"": 0.4}",positive,active,0,,,包丁の素材=セラミック
+t0004,core:knife.kitchen-001,core:category-001,core:blade-tool-001,"{""domain"": [""cooking""], ""region"": [""JP""], ""freq"": 1.0}",positive,active,0,,,包丁の分類=刃物
+t0005,core:knife.kitchen-001,core:category-001,core:knife.generic-001,"{""domain"": [""cooking""], ""region"": [""JP""], ""freq"": 0.3}",positive,draft,0,,,包丁とナイフの関係
+t0006,core:knife.generic-001,core:use-purpose-001,core:cut.with_blade-001,"{""domain"": [""cooking""], ""region"": [""JP"", ""US"", ""UK""], ""freq"": 0.7}",positive,active,0,,,ナイフ(一般)の用途=切る
+t0007,core:knife.generic-001,core:category-001,core:blade-tool-001,"{""domain"": [""cooking""], ""region"": [""JP"", ""US"", ""UK""], ""freq"": 0.8}",positive,active,0,,,ナイフ(一般)の分類=刃物
