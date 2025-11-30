@@ -81,20 +81,38 @@ These views are computed—not stored—to ensure consistency.
 
 ```
 /
-├─ semantic-graph-spec-v1.md      # Core specification
-├─ philosophy-vision.md           # Why the OS exists
-├─ tooling-overview.md            # Tools & application domains
-├─ roadmap.md                     # 6-month and long-term plan
-├─ data/
-│   ├─ core_concepts.csv
-│   ├─ meaning_triples.csv
-│   ├─ expr_links.csv
-│   └─ rel_concepts.csv
-├─ spaces/
-│   ├─ Public-UI-Space/           # HuggingFace public UI
-│   └─ Private-Backend-Space/     # HuggingFace backend API
-└─ examples/
-    └─ sample_queries.md
+├─ README_en.md # This file
+├─ README_ja.md # Japanese version
+
+├─ demonstration/ # Runtime demo environments
+│ ├─ Hugging-Face-Spaces/ # Backend Space (private)
+│ │ ├─ app.py
+│ │ ├─ requirements.txt
+│ │ ├─ deta/
+│ │ │ ├─ core_concepts.csv
+│ │ │ ├─ expr_links.csv
+│ │ │ ├─ meaning_triples.csv
+│ │ │ ├─ meaning_triples_with_reverse.csv
+│ │ │ ├─ triple_evidence.csv
+│ │ └─ py/
+│ │ └─ mini_os_demo.py
+│ └─ Public-UI-Space/ # Public Space (frontend UI)
+│ └─ app.py
+
+├─ README_en.ed # Editable draft version of README
+├─ README_ja.md # Japanese README (final)
+
+├─ docs/
+│ ├─ en/
+│ │ ├─ philosophy-and-vision.md
+│ │ ├─ roadmap.md
+│ │ ├─ semantic-graph-spec-v1.md
+│ │ ├─ tooling-overview.md
+│ └─ ja/
+│ ├─ philosophy-and-vision.md
+│ ├─ roadmap.md
+│ ├─ semantic-graph-spec-v1.md
+│ └─ tooling-overview.md
 ```
 
 ---
