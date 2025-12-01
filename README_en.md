@@ -1,5 +1,7 @@
 # 🌐 **Language OS（意味OS） – A Universal Semantic Operating System**
 
+**（Note: This document was created with the assistance of translation and language-support tools, and then manually reviewed and refined.）**
+
 **Meaning is not text. Meaning is structure.**
 Language OS is an open, transparent framework for storing and operating on **immutable semantic structures**
 that remain valid across languages, cultures, eras, and domains.
