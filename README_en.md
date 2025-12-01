@@ -219,13 +219,6 @@ Guidelines for triple creation, review, and evidence submission will be added.
 
 ---
 
-# 📄 License
-
-Open and transparent by design.
-(Exact license TBD based on community and foundation requirements.)
-
----
-
 # 🔗 Links
 
 * **Public UI (Hugging Face Space)**
