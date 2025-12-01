@@ -229,7 +229,6 @@ Open and transparent by design.
 # 🔗 Links
 
 * **Public UI (Hugging Face Space)**
-* **Private Backend API (Hugging Face Space)**
-* **Documentation** (`spec`, `philosophy`, `roadmap`)
+**https://huggingface.co/spaces/aki117463/Public-UI-Space**
 
 ---
