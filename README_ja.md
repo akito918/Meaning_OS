@@ -229,7 +229,6 @@ triple 作成・レビュー・根拠登録のガイドラインも公開予定�
 # 🔗 リンク
 
 * **Public UI (Hugging Face Space)**
-* **Private Backend API (Hugging Face Space)**
-* **Documentation**（spec / philosophy / roadmap）
+**https://huggingface.co/spaces/aki117463/Public-UI-Space**
 
 ---
